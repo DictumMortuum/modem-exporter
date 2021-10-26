@@ -11,4 +11,4 @@ install: build
 	cp -f servus $(PREFIX)/bin
 
 install-service:
-	cp -f systemd/servus.service /etc/systemd/system/
+	cp -f systemd/prometheus-modem-exporter.service /etc/systemd/system/
