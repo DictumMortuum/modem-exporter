@@ -1,15 +1,54 @@
 package metrics
 
 import (
-	"log"
-
 	"github.com/prometheus/client_golang/prometheus"
+	"log"
 )
 
 var (
 	Uptime = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "uptime",
+			Namespace: "modem",
+		},
+		[]string{"hostname"},
+	)
+
+	Status = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "status",
+			Namespace: "modem",
+		},
+		[]string{"hostname"},
+	)
+
+	MaxUp = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "max_up",
+			Namespace: "modem",
+		},
+		[]string{"hostname"},
+	)
+
+	MaxDown = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "max_down",
+			Namespace: "modem",
+		},
+		[]string{"hostname"},
+	)
+
+	DataUp = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "data_up",
+			Namespace: "modem",
+		},
+		[]string{"hostname"},
+	)
+
+	DataDown = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "data_down",
 			Namespace: "modem",
 		},
 		[]string{"hostname"},
@@ -31,6 +70,22 @@ var (
 		[]string{"hostname"},
 	)
 
+	FECUp = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "fec_up",
+			Namespace: "modem",
+		},
+		[]string{"hostname"},
+	)
+
+	FECDown = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "fec_down",
+			Namespace: "modem",
+		},
+		[]string{"hostname"},
+	)
+
 	CRCUp = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "crc_up",
@@ -47,23 +102,38 @@ var (
 		[]string{"hostname"},
 	)
 
-	Status = prometheus.NewGaugeVec(
+	SNRUp = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name:      "enabled",
+			Name:      "snr_up",
+			Namespace: "modem",
+		},
+		[]string{"hostname"},
+	)
+
+	SNRDown = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "snr_down",
 			Namespace: "modem",
 		},
 		[]string{"hostname"},
 	)
 )
 
-// Init initializes all Prometheus metrics made available by PI-Hole exporter.
 func Init() {
 	initMetric("modem_uptime", Uptime)
+	initMetric("modem_status", Status)
 	initMetric("modem_current_up", CurrentUp)
 	initMetric("modem_current_down", CurrentDown)
+	initMetric("modem_max_up", MaxUp)
+	initMetric("modem_max_down", MaxDown)
+	initMetric("modem_data_up", DataUp)
+	initMetric("modem_data_down", DataDown)
+	initMetric("modem_fec_up", FECUp)
+	initMetric("modem_fec_down", FECDown)
 	initMetric("modem_crc_up", CRCUp)
 	initMetric("modem_crc_down", CRCDown)
-	initMetric("enabled", Status)
+	initMetric("modem_snr_up", SNRUp)
+	initMetric("modem_snr_down", SNRDown)
 }
 
 func initMetric(name string, metric *prometheus.GaugeVec) {

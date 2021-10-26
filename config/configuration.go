@@ -2,30 +2,26 @@ package config
 
 import (
 	"context"
-	"time"
-
 	"github.com/heetch/confita"
 	"github.com/heetch/confita/backend"
 	"github.com/heetch/confita/backend/env"
 	"github.com/heetch/confita/backend/flags"
 )
 
-// Config is the exporter CLI configuration.
 type Config struct {
-	Hostname string        `config:"host"`
-	Port     string        `config:"port"`
-	Interval time.Duration `config:"interval"`
+	Hostname string `config:"host"`
+	Modem    string `config:"modem"`
+	Port     string `config:"port"`
 }
 
 func getDefaultConfig() *Config {
 	return &Config{
 		Hostname: "192.168.2.254",
-		Port:     "6102",
-		Interval: 180 * time.Second,
+		Modem:    "TD5130",
+		Port:     "9618",
 	}
 }
 
-// Load method loads the configuration by using both flag or environment variables.
 func Load() *Config {
 	loaders := []backend.Backend{
 		env.NewBackend(),

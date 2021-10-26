@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-
 	"github.com/DictumMortuum/modem-exporter/config"
 	"github.com/DictumMortuum/modem-exporter/internal/metrics"
 	"github.com/DictumMortuum/modem-exporter/internal/modem"
@@ -34,5 +33,5 @@ func main() {
 	case <-serverDead:
 	}
 
-	fmt.Println("pihole-exporter HTTP server stopped")
+	fmt.Println("modem-exporter HTTP server stopped")
 }
