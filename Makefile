@@ -8,7 +8,7 @@ build: format
 
 install: build
 	mkdir -p $(PREFIX)/bin
-	cp -f servus $(PREFIX)/bin
+	cp -f modem-exporter $(PREFIX)/bin
 
 install-service:
 	cp -f systemd/prometheus-modem-exporter.service /etc/systemd/system/
