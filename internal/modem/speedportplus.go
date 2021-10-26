@@ -56,10 +56,10 @@ func (m *ModemSpeedportPlus) GetStatistics(c *Client) (*Stats, error) {
 	// TODO: need to parse 95 days, 7 hours, 48 minutes, 55 seconds to unix timestamp
 	stats.Uptime = 0
 	stats.Status = modem_config["dsl_status"] == "online"
-	stats.CurrentUp, _ = strconv.Atoi(modem_config["dsl_downstream"])
-	stats.CurrentDown, _ = strconv.Atoi(modem_config["dsl_upstream"])
-	stats.MaxUp, _ = strconv.Atoi(modem_config["dsl_max_downstream"])
-	stats.MaxDown, _ = strconv.Atoi(modem_config["dsl_max_upstream"])
+	stats.CurrentUp, _ = strconv.Atoi(modem_config["dsl_upstream"])
+	stats.CurrentDown, _ = strconv.Atoi(modem_config["dsl_downstream"])
+	stats.MaxUp, _ = strconv.Atoi(modem_config["dsl_max_upstream"])
+	stats.MaxDown, _ = strconv.Atoi(modem_config["dsl_max_downstream"])
 	stats.DataUp = 0
 	stats.DataDown = 0
 	// TODO: speedport only reports a single number of FEC errors, not two for up/down
