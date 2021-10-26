@@ -9,7 +9,7 @@ import (
 var (
 	Uptime = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name:      "modem_uptime",
+			Name:      "uptime",
 			Namespace: "modem",
 		},
 		[]string{"hostname"},
@@ -17,7 +17,7 @@ var (
 
 	CurrentUp = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name:      "modem_current_up",
+			Name:      "current_up",
 			Namespace: "modem",
 		},
 		[]string{"hostname"},
@@ -25,7 +25,7 @@ var (
 
 	CurrentDown = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name:      "modem_current_down",
+			Name:      "current_down",
 			Namespace: "modem",
 		},
 		[]string{"hostname"},
@@ -33,7 +33,7 @@ var (
 
 	CRCUp = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name:      "modem_crc_up",
+			Name:      "crc_up",
 			Namespace: "modem",
 		},
 		[]string{"hostname"},
@@ -41,7 +41,15 @@ var (
 
 	CRCDown = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
-			Name:      "modem_crc_down",
+			Name:      "crc_down",
+			Namespace: "modem",
+		},
+		[]string{"hostname"},
+	)
+
+	Status = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "enabled",
 			Namespace: "modem",
 		},
 		[]string{"hostname"},
@@ -55,6 +63,7 @@ func Init() {
 	initMetric("modem_current_down", CurrentDown)
 	initMetric("modem_crc_up", CRCUp)
 	initMetric("modem_crc_down", CRCDown)
+	initMetric("enabled", Status)
 }
 
 func initMetric(name string, metric *prometheus.GaugeVec) {

@@ -4,6 +4,7 @@ import "fmt"
 
 type Stats struct {
 	Uptime      int64 `json:"uptime"`
+	Status     bool `json:"status"`
 	CurrentUp   int   `json:"current_up"`
 	CurrentDown int   `json:"current_down"`
 	CRCUp       int   `json:"crc_up"`

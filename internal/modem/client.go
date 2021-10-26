@@ -59,6 +59,13 @@ func (c *Client) setMetrics(stats *Stats) {
 	metrics.CurrentDown.WithLabelValues(c.config.Hostname).Set(float64(stats.CurrentDown))
 	metrics.CRCUp.WithLabelValues(c.config.Hostname).Set(float64(stats.CRCUp))
 	metrics.CRCDown.WithLabelValues(c.config.Hostname).Set(float64(stats.CRCDown))
+
+	var isEnabled int = 0
+	if stats.Status == true {
+		isEnabled = 1
+	}
+
+	metrics.Status.WithLabelValues(c.config.Hostname).Set(float64(isEnabled))
 }
 
 func (c *Client) getStatistics() (*Stats, error) {
@@ -120,8 +127,8 @@ func (c *Client) getStatistics() (*Stats, error) {
 	}
 
 	// If the interface is bridged, it's not going to reset the uptime timer. So will do it manually here.
-	// dsl, _ := data.ToInteger()
-	// retval.Disconnected = dsl != 1
+	dsl, _ := data.ToInteger()
+	retval.Status = dsl == 1
 
 	// t := time.Now().Add(time.Duration(-uptime) * time.Second)
 	// retval.Date = time.Date(t.Year(), t.Month(), t.Day(), t.Hour(), t.Minute(), 0, 0, t.Location())
