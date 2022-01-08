@@ -27,7 +27,7 @@ func Load() *Config {
 	loaders := []backend.Backend{
 		env.NewBackend(),
 		flags.NewBackend(),
-		file.NewBackend("/etc/modem_exporter.conf"),
+		file.NewBackend("/etc/modem_exporter.yaml"),
 	}
 
 	loader := confita.NewLoader(loaders...)
