@@ -5,6 +5,7 @@ import (
 	"github.com/heetch/confita"
 	"github.com/heetch/confita/backend"
 	"github.com/heetch/confita/backend/env"
+	"github.com/heetch/confita/backend/file"
 	"github.com/heetch/confita/backend/flags"
 )
 
@@ -26,6 +27,7 @@ func Load() *Config {
 	loaders := []backend.Backend{
 		env.NewBackend(),
 		flags.NewBackend(),
+		file.NewBackend("/etc/modem_exporter.conf"),
 	}
 
 	loader := confita.NewLoader(loaders...)
