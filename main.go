@@ -11,14 +11,11 @@ import (
 
 func main() {
 	conf := config.Load()
-
-	fmt.Println(conf)
-	return
-
 	metrics.Init()
 
 	serverDead := make(chan struct{})
 	s := server.NewServer(conf.Port, modem.NewClient(conf))
+	fmt.Println(conf)
 	go func() {
 		s.ListenAndServe()
 		close(serverDead)
@@ -36,6 +33,6 @@ func main() {
 	case <-serverDead:
 	}
 
-	version := "0.0.6"
+	version := "0.0.7"
 	fmt.Printf("modem-exporter v%s HTTP server stopped\n", version)
 }
