@@ -12,6 +12,9 @@ import (
 func main() {
 	conf := config.Load()
 
+	fmt.Println(conf)
+	return
+
 	metrics.Init()
 
 	serverDead := make(chan struct{})
@@ -33,6 +36,6 @@ func main() {
 	case <-serverDead:
 	}
 
-	version := "0.0.5"
+	version := "0.0.6"
 	fmt.Printf("modem-exporter v%s HTTP server stopped\n", version)
 }

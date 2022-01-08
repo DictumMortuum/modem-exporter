@@ -15,7 +15,7 @@ type ModemTD5130 struct{}
 
 func (m *ModemTD5130) GetStatistics(c *Client) (*Stats, error) {
 	retval := new(Stats)
-	ip := c.config.Hostname
+	ip := c.config.Host
 	ppp := "ip"
 	ppp = strings.ToUpper(ppp)
 

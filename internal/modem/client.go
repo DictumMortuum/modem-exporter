@@ -38,26 +38,26 @@ func (c *Client) Metrics() http.HandlerFunc {
 }
 
 func (c *Client) setMetrics(stats *Stats) {
-	metrics.Uptime.WithLabelValues(c.config.Hostname).Set(float64(stats.Uptime))
-	metrics.CurrentUp.WithLabelValues(c.config.Hostname).Set(float64(stats.CurrentUp))
-	metrics.CurrentDown.WithLabelValues(c.config.Hostname).Set(float64(stats.CurrentDown))
-	metrics.CRCUp.WithLabelValues(c.config.Hostname).Set(float64(stats.CRCUp))
-	metrics.CRCDown.WithLabelValues(c.config.Hostname).Set(float64(stats.CRCDown))
-	metrics.MaxUp.WithLabelValues(c.config.Hostname).Set(float64(stats.MaxUp))
-	metrics.MaxDown.WithLabelValues(c.config.Hostname).Set(float64(stats.MaxDown))
-	metrics.DataUp.WithLabelValues(c.config.Hostname).Set(float64(stats.DataUp))
-	metrics.DataDown.WithLabelValues(c.config.Hostname).Set(float64(stats.DataDown))
-	metrics.FECUp.WithLabelValues(c.config.Hostname).Set(float64(stats.FECUp))
-	metrics.FECDown.WithLabelValues(c.config.Hostname).Set(float64(stats.FECDown))
-	metrics.SNRUp.WithLabelValues(c.config.Hostname).Set(float64(stats.SNRUp))
-	metrics.SNRDown.WithLabelValues(c.config.Hostname).Set(float64(stats.SNRDown))
+	metrics.Uptime.WithLabelValues(c.config.Host).Set(float64(stats.Uptime))
+	metrics.CurrentUp.WithLabelValues(c.config.Host).Set(float64(stats.CurrentUp))
+	metrics.CurrentDown.WithLabelValues(c.config.Host).Set(float64(stats.CurrentDown))
+	metrics.CRCUp.WithLabelValues(c.config.Host).Set(float64(stats.CRCUp))
+	metrics.CRCDown.WithLabelValues(c.config.Host).Set(float64(stats.CRCDown))
+	metrics.MaxUp.WithLabelValues(c.config.Host).Set(float64(stats.MaxUp))
+	metrics.MaxDown.WithLabelValues(c.config.Host).Set(float64(stats.MaxDown))
+	metrics.DataUp.WithLabelValues(c.config.Host).Set(float64(stats.DataUp))
+	metrics.DataDown.WithLabelValues(c.config.Host).Set(float64(stats.DataDown))
+	metrics.FECUp.WithLabelValues(c.config.Host).Set(float64(stats.FECUp))
+	metrics.FECDown.WithLabelValues(c.config.Host).Set(float64(stats.FECDown))
+	metrics.SNRUp.WithLabelValues(c.config.Host).Set(float64(stats.SNRUp))
+	metrics.SNRDown.WithLabelValues(c.config.Host).Set(float64(stats.SNRDown))
 
 	var isEnabled int = 0
 	if stats.Status == true {
 		isEnabled = 1
 	}
 
-	metrics.Status.WithLabelValues(c.config.Hostname).Set(float64(isEnabled))
+	metrics.Status.WithLabelValues(c.config.Host).Set(float64(isEnabled))
 }
 
 func (c *Client) getStatistics() (*Stats, error) {

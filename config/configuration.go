@@ -10,17 +10,9 @@ import (
 )
 
 type Config struct {
-	Hostname string `config:"host"`
-	Modem    string `config:"modem"`
-	Port     string `config:"port"`
-}
-
-func getDefaultConfig() *Config {
-	return &Config{
-		Hostname: "192.168.2.254",
-		Modem:    "TD5130",
-		Port:     "9618",
-	}
+	Host  string `config:"host"`
+	Modem string `config:"modem"`
+	Port  string `config:"port"`
 }
 
 func Load() *Config {
@@ -32,11 +24,16 @@ func Load() *Config {
 
 	loader := confita.NewLoader(loaders...)
 
-	cfg := getDefaultConfig()
-	err := loader.Load(context.Background(), cfg)
+	cfg := Config{
+		Host:  "192.168.2.254",
+		Modem: "TD5130",
+		Port:  "9618",
+	}
+
+	err := loader.Load(context.Background(), &cfg)
 	if err != nil {
 		panic(err)
 	}
 
-	return cfg
+	return &cfg
 }

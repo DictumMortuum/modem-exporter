@@ -15,7 +15,7 @@ type ModemSpeedportPlus struct{}
 func (m *ModemSpeedportPlus) GetStatistics(c *Client) (*Stats, error) {
 	stats := new(Stats)
 
-	req, err := http.NewRequest("GET", "http://"+c.config.Hostname+"/data/Status.json", nil)
+	req, err := http.NewRequest("GET", "http://"+c.config.Host+"/data/Status.json", nil)
 	if err != nil {
 		return nil, err
 	}
