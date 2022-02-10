@@ -13,13 +13,15 @@ type Config struct {
 	Host  string `config:"host"`
 	Modem string `config:"modem"`
 	Port  string `config:"port"`
+	User  string `config:"user"`
+	Pass  string `config:"pass"`
 }
 
 func Load() *Config {
 	loaders := []backend.Backend{
+		file.NewBackend("/etc/modem_exporter.yaml"),
 		env.NewBackend(),
 		flags.NewBackend(),
-		file.NewBackend("/etc/modem_exporter.yaml"),
 	}
 
 	loader := confita.NewLoader(loaders...)
@@ -28,6 +30,8 @@ func Load() *Config {
 		Host:  "192.168.2.254",
 		Modem: "TD5130",
 		Port:  "9618",
+		User:  "",
+		Pass:  "",
 	}
 
 	err := loader.Load(context.Background(), &cfg)

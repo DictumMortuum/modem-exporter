@@ -68,6 +68,9 @@ func (c *Client) getStatistics() (*Stats, error) {
 	case "SpeedportPlus":
 		rs := ModemSpeedportPlus{}
 		return rs.GetStatistics(c)
+	case "DG8245V-10":
+		rs := DG8245V{}
+		return rs.GetStatistics(c)
 	default:
 		return nil, nil
 	}
