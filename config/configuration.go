@@ -19,8 +19,8 @@ type Config struct {
 
 func Load() *Config {
 	loaders := []backend.Backend{
-		file.NewBackend("/etc/modem_exporter.yaml"),
 		env.NewBackend(),
+		file.NewBackend("/etc/modem_exporter.yaml"),
 		flags.NewBackend(),
 	}
 
