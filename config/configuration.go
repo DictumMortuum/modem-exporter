@@ -20,7 +20,7 @@ type Config struct {
 func Load() *Config {
 	loaders := []backend.Backend{
 		env.NewBackend(),
-		file.NewBackend("/etc/modem_exporter.yaml"),
+		file.NewOptionalBackend("/etc/modem_exporter.yaml"),
 		flags.NewBackend(),
 	}
 
