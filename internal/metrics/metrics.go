@@ -22,6 +22,14 @@ var (
 		[]string{"hostname"},
 	)
 
+	VoipStatus = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Name:      "voip_status",
+			Namespace: "modem",
+		},
+		[]string{"hostname"},
+	)
+
 	MaxUp = prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name:      "max_up",
@@ -122,6 +130,7 @@ var (
 func Init() {
 	initMetric("modem_uptime", Uptime)
 	initMetric("modem_status", Status)
+	initMetric("modem_voip_status", VoipStatus)
 	initMetric("modem_current_up", CurrentUp)
 	initMetric("modem_current_down", CurrentDown)
 	initMetric("modem_max_up", MaxUp)

@@ -15,6 +15,7 @@ type Config struct {
 	Port  string `config:"port"`
 	User  string `config:"user"`
 	Pass  string `config:"pass"`
+	Voip  string `config:"voip"`
 }
 
 func Load() *Config {
@@ -32,6 +33,7 @@ func Load() *Config {
 		Port:  "9618",
 		User:  "",
 		Pass:  "",
+		Voip:  "",
 	}
 
 	err := loader.Load(context.Background(), &cfg)

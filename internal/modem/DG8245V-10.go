@@ -21,6 +21,7 @@ var (
 	re_crc_up   = regexp.MustCompile(`ATUCCRCErrors:\s+(\d+)`)
 	re_bytes    = regexp.MustCompile(`bytessent\s+= (\d+)\s+,bytesreceived\s+= (\d+)`)
 	re_snr      = regexp.MustCompile(`display dsl snr up=([\d\.]+) down=([\d\.]+) success`)
+	re_voip     = regexp.MustCompile(`Status\s+:Enable`)
 )
 
 func expect(t *telnet.Conn, d ...string) error {
@@ -194,6 +195,23 @@ func (m *DG8245V) GetStatistics(c *Client) (*Stats, error) {
 		stats.SNRUp = 0
 		//stats.SNRDown = match[2]
 		stats.SNRDown = 0
+	}
+
+	err = sendln(t, "display waninfo interface "+c.config.Voip)
+	if err != nil {
+		return nil, err
+	}
+
+	data, err = t.ReadBytes('>')
+	if err != nil {
+		return nil, err
+	}
+
+	raw = string(data)
+
+	refs = re_voip.FindAllStringSubmatch(raw, -1)
+	if len(refs) > 0 {
+		stats.VoipStatus = true
 	}
 
 	return stats, nil

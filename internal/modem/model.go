@@ -3,6 +3,7 @@ package modem
 type Stats struct {
 	Uptime      int64 `json:"uptime"`
 	Status      bool  `json:"status"`
+	VoipStatus  bool  `json:"voip_status"`
 	CurrentUp   int   `json:"current_up"`
 	CurrentDown int   `json:"current_down"`
 	MaxUp       int   `json:"max_up"`

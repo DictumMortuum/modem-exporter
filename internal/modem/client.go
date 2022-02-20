@@ -58,6 +58,13 @@ func (c *Client) setMetrics(stats *Stats) {
 	}
 
 	metrics.Status.WithLabelValues(c.config.Host).Set(float64(isEnabled))
+
+	var isVoipEnabled int = 0
+	if stats.VoipStatus == true {
+		isVoipEnabled = 1
+	}
+
+	metrics.VoipStatus.WithLabelValues(c.config.Host).Set(float64(isVoipEnabled))
 }
 
 func (c *Client) getStatistics() (*Stats, error) {
