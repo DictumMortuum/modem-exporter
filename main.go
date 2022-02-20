@@ -33,6 +33,6 @@ func main() {
 	case <-serverDead:
 	}
 
-	version := "0.0.9"
+	version := "0.0.10"
 	fmt.Printf("modem-exporter v%s HTTP server stopped\n", version)
 }
