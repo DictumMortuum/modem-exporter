@@ -70,11 +70,8 @@ func (m *ModemSpeedportPlus) GetStatistics(c *Client) (*Stats, error) {
 	stats.CRCDown = 0
 	// TODO: parse SNR correctly. Could snr be line attenuation here?
 	snr := strings.Split(modem_config["dsl_snr"], "/")
-	snr_up, _ := strconv.Atoi(strings.TrimSpace(snr[0]))
-	snr_down, _ := strconv.Atoi(strings.TrimSpace(snr[1]))
-	// fmt.Println(snr, snr_up, int64(snr_up))
-	stats.SNRUp = int64(snr_up)
-	stats.SNRDown = int64(snr_down)
+	stats.SNRUp = atof(strings.TrimSpace(snr[0]))
+	stats.SNRDown = atof(strings.TrimSpace(snr[1]))
 
 	return stats, nil
 }

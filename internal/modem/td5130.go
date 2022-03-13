@@ -137,14 +137,16 @@ func (m *ModemTD5130) GetStatistics(c *Client) (*Stats, error) {
 		return nil, err
 	}
 
-	retval.SNRUp, _ = snr.ToInteger()
+	snrup, _ := snr.ToInteger()
+	retval.SNRUp = float64(snrup)
 
 	snr, err = vm.Get("dsNoiseMargin")
 	if err != nil {
 		return nil, err
 	}
 
-	retval.SNRDown, _ = snr.ToInteger()
+	snrdown, _ := snr.ToInteger()
+	retval.SNRDown = float64(snrdown)
 
 	return retval, nil
 }

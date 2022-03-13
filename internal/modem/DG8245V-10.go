@@ -66,6 +66,11 @@ func atoi64(s string) int64 {
 	return i
 }
 
+func atof(s string) float64 {
+	f, _ := strconv.ParseFloat(s, 64)
+	return f
+}
+
 func (m *DG8245V) GetStatistics(c *Client) (*Stats, error) {
 	stats := new(Stats)
 
@@ -190,11 +195,9 @@ func (m *DG8245V) GetStatistics(c *Client) (*Stats, error) {
 
 	refs = re_snr.FindAllStringSubmatch(raw, -1)
 	if len(refs) > 0 {
-		//match := refs[0]
-		//stats.SNRUp = match[1]
-		stats.SNRUp = 0
-		//stats.SNRDown = match[2]
-		stats.SNRDown = 0
+		match := refs[0]
+		stats.SNRUp = atof(match[1])
+		stats.SNRDown = atof(match[2])
 	}
 
 	err = sendln(t, "display waninfo interface "+c.config.Voip)
